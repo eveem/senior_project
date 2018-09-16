@@ -1,0 +1,3 @@
+get_legals.py  : scrap html
+
+formatter.py   : <p>.....</p> -> [{'เลขมาตรา': 'detail'}, {'เลขมาตรา', 'detail'}, ...]
