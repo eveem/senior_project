@@ -1,3 +1,6 @@
 get_legals.py  : scrap html
 
-formatter.py   : <p>.....</p> -> [{'เลขมาตรา': 'detail'}, {'เลขมาตรา', 'detail'}, ...]
+formatter.py   : <p>.....</p> -> [{'เลขมาตรา': ['คำ', ...]}, {'เลขมาตรา': ['คำ', ...]}, ...]
+                              -> law_with_words.pickle
+
+law_word_count.py   : 

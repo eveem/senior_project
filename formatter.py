@@ -1,3 +1,6 @@
+import deepcut
+import pickle
+
 f = open('criminal_code.html', 'r')
 
 law_list = []
@@ -26,5 +29,16 @@ for law in law_list[1:]:
         fin_law.append(prev_law)
         prev_law = law
 
-for i in fin_law:
-    print(i)
+fin_law = fin_law[1:]
+dict_format = []
+
+for law in fin_law:
+    all_words = []
+    for text in law[2:]:
+        all_words += deepcut.tokenize(text)
+    dict_format.append({law[1]: all_words})
+
+with open('law_with_words.pickle', 'wb') as f:
+    pickle.dump(dict_format, f, pickle.HIGHEST_PROTOCOL)
+
+print("Dump complete !!")
