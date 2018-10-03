@@ -1,4 +1,5 @@
 import pickle
+from math import log10
 
 with open('law_with_words.pickle', 'rb') as f:
     laws = pickle.load(f)
@@ -17,6 +18,6 @@ for law_dict in laws:
             word_idf[word] = 1
 
 for word in word_idf:
-    word_idf[word] = word_idf[word]/all_law_no
+    word_idf[word] = log10(all_law_no/word_idf[word])
 
 print(word_idf)
