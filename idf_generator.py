@@ -17,6 +17,9 @@ for law_dict in laws:
         else:
             words_idf[word] = 1
 
+with open('words_and_freq.pickle', 'wb') as f:
+    pickle.dump(words_idf, f, pickle.HIGHEST_PROTOCOL)
+
 for word in words_idf:
     words_idf[word] = log10(all_law_no/words_idf[word])
 
