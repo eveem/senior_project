@@ -13,7 +13,7 @@ for i in new_data:
         new_dict[i] = data[i]
         word_list.append(i)
 
-with open('law_with_words.pickle', 'rb') as f:
+with open('law_words_tfidf.pickle', 'rb') as f:
     laws = pickle.load(f)
 
 laws_vector = {}
@@ -24,9 +24,8 @@ for law_dict in laws:
         words = law_dict[no_law]
     for word in words:
         if word in word_list:
-            x[word_list.index(word)] = data[word]
-        else:
-            x[len(word_list)] = 1
+            x[word_list.index(word)] = words[word]
     laws_vector[no_law] = x
 
-print(laws_vector)
+with open('law_vector.pickle', 'wb') as f:
+    pickle.dump(laws_vector, f, pickle.HIGHEST_PROTOCOL)
