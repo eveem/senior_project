@@ -1,6 +1,20 @@
 .App {
   text-align: center;
   margin-top: 10%;
-  margin-left: 15%;
-  margin-right: 15%;
+  margin-left: 10%;
+  margin-right: 10%;
+  padding: 20px;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 1px 4px 8px 0 rgba(0, 0, 0, 0.6), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+}
+
+hr { 
+  border-width: 2px;
+} 
+
+body {
+  /* background-color: rgba(131,49,51,0.84); */
+  background: rgb(89,32,32);
+  background: radial-gradient(circle, rgba(89,32,32,0.5844712885154062) 0%, rgba(106,0,0,0.43881302521008403) 100%);
 }
