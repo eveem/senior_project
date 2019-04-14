@@ -12,7 +12,7 @@ CORS(app)
 
 def get_dict():
     d = []
-    f = open('./dict.txt')
+    f = open('./dict40.txt')
     for line in f:
         d.append(line.replace('\n', ''))
     return d
@@ -29,12 +29,20 @@ def get_words_idf():
     f.close()
     return object_file
 
+def get_desc():
+    f = open('./code_law.pickle','rb')
+    object_file = pickle.load(f)
+    f.close()
+    return object_file
+
 def get_law(text):
     use_this_dict_to_cut_and_build_matix = get_dict()
     tfidf_per_NO = get_tfidf()
     words_idf = get_words_idf()
+    code_law_dict = get_desc()
 
     w_indoc = {}
+    law = []
     ll = 0
 
     for w in use_this_dict_to_cut_and_build_matix:
@@ -60,14 +68,19 @@ def get_law(text):
         r_NO[no] = s
     sorted_r_NO = sorted(r_NO.items(), key=operator.itemgetter(1))
     sorted_r_NO = sorted_r_NO[::-1]
-    y = json.dumps(sorted_r_NO, ensure_ascii=False).encode('utf8')
+    
+    for i in sorted_r_NO:
+        if i[1] > 0:
+            law.append({'code': i[0], 'desc': code_law_dict[i[0]], 'score': '{0:.2f}'.format(i[1])})
+    gg = {'law': law}
+    y = json.dumps(gg, ensure_ascii=False).encode('utf8')
     return y
 
 @app.route('/test')
 def test():
     return 'Test service success'
 
-@app.route('/', methods=['POST'])
+@app.route('/', methods=['GET', 'POST'])
 def process():
     text = request.args.get('text', default='')
     # text = request.form.get('text', default='')
