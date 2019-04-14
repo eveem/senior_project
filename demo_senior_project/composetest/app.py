@@ -1,3 +1,4 @@
+import json
 import operator
 import pickle
 import string
@@ -59,8 +60,8 @@ def get_law(text):
         r_NO[no] = s
     sorted_r_NO = sorted(r_NO.items(), key=operator.itemgetter(1))
     sorted_r_NO = sorted_r_NO[::-1]
-    
-    return sorted_r_NO
+    y = json.dumps(sorted_r_NO, ensure_ascii=False).encode('utf8')
+    return y
 
 @app.route('/test')
 def test():
@@ -71,7 +72,7 @@ def process():
     text = request.args.get('text', default='')
     # text = request.form.get('text', default='')
     result = get_law(text)
-    return str(result)
+    return result
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
